@@ -1,0 +1,52 @@
+(1)<div class="firstChart">
+    <canvas class="myChart"></canvas>
+   </div>
+(2)在script和export default中間import Chart from "chart.js";
+不需在main.js import
+(3)在methods new出來,在mounted刷新
+(4)
+x 軸的key > data的labels的陣列
+y 軸的key > 
+各筆數據的value > datasets下的data陣列
+圖表標題legends要顯示的東西 > datasets下的label陣列
+其他顏色之類的可以用陣列按順序來代表每個顏色,或單一顏色
+調整x,y軸的fontSize Axes > styling
+調整整個圖表大小 > General的Responsive 
+options:{
+  maintainAspectRatio:false
+}
+不同chart要用不同class
+props的數值要用watch,因為不會立即更新
+canvas的父層設定width和height,至於本身canvas自動會張開到容器
+刷新圖表新資料:
+<1>remove myChart和chart.js-size-monitor的節點
+<2>createElement 一個canvas節點
+<3>把canvas重新 classList add加回去myChart的class名稱,至於chart.js-size-monitor會自己產生
+<4>在容器內重新appendChild上canvas這個節點
+<5>最後this.createChart()刷新
+(5)
+datasets的api > 文檔的Charts下的各種線圖裡,所以每種圖形有不同的datasets api
+
+options 的api > 文檔的Configuration下的就是hook
+*legend要加s
+(6)
+options一個特別多api的hook scales > 文檔的Axes
+scales裡可以寫xAxes和yAxes,各自裡面再寫ticks
+ticks的文檔 > 文檔的Axes,所以每種圖形有不同的ticks api
+
+所以x和y都是參考Axes裡
+常用的有控制y 軸的key數值大小suggestmin、suggestmax
+
+scales: {
+  yAxes: [
+   {
+    ticks: {
+      //beginAtZero: true
+     }
+    }
+  ]
+ },
+xAxes: [{
+    type: 'category',
+    labels: ['January', 'February']
+}]
